@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+#py-backup-script
+#release-0.1.0
 
 import argparse
 import os
@@ -105,6 +107,8 @@ def config_parser():
             except:
                 host_rsync = "arp"  #Default rsync flags
             #paths array check
+            if (debug == 1):
+                print("<debug> commands:")
             try:
                 for paths in hosts[1]["paths"]:
                     #host_path check
@@ -125,9 +129,8 @@ def config_parser():
                     except:
                         host_rsync_custom = host_rsync
                     #exection_rsync instantiation
-                    print(host_rsync_custom)
-                    execution_rsync(hosts[0],host_ip,host_port,host_user,host_rsync_custom,host_os,host_path,host_dest)
-            except KeyboardInterrupt:#change
+                    execution_rsync(hosts,host_rsync_custom,host_ip,host_port,host_user,host_os,host_path,host_dest)
+            except:
                 print("\nERROR: missing path or destination definitions")
                 quit()
             #custom array check
@@ -146,8 +149,7 @@ def config_parser():
                         print("\nERROR: missing custom cmd out definition")
                         quit()
                     #execution_custom instantiation
-                    execution_custom(hosts,host_ip,host_port,host_user,host_os,host_rsync_custom,custom_cmd,custom_cmd_out)
-                    #execution_custom()
+                    execution_custom(hosts,host_ip,host_port,host_user,host_os,custom_cmd,custom_cmd_out)
             except:
                 pass
     else:
@@ -156,7 +158,7 @@ def config_parser():
             
 ##############################################################################################################################################################################################
 #Execution rsync function
-def execution_rsync(hosts,host_ip,host_port,host_user,host_os,host_rsync_custom,host_path,host_dest):
+def execution_rsync(hosts,host_rsync_custom,host_ip,host_port,host_user,host_os,host_path,host_dest):
     global debug    #Global debug variable
 
     if (debug == 1):
@@ -165,21 +167,14 @@ def execution_rsync(hosts,host_ip,host_port,host_user,host_os,host_rsync_custom,
 
 ##############################################################################################################################################################################################
 #Execution custom function
-def execution_rsync(hosts,host_ip,host_port,host_user,host_os,custom_cmd,custom_cmd_out):
-    global debug
+def execution_custom(hosts,host_ip,host_port,host_user,host_os,custom_cmd,custom_cmd_out):
+    global debug    #Global debug variable
     
     if(debug == 1):
         print("<debug>",hosts[0] + ":",custom_cmd,custom_cmd_out)
 
-    subprocess.run("ssh","-p",host_port,host_user + "@" + host_ip,custom_cmd,'>',custom_cmd_out,shell=True,check=True)
-
-
-
-
-
-
-
-
+    with open(custom_cmd_out,'w+') as cmd_output:
+        subprocess.run(['ssh','-p',host_port,host_user + "@" + host_ip,custom_cmd],stdout=cmd_output,universal_newlines=True,stderr=subprocess.PIPE)
 
 ##############################################################################################################################################################################################
 #Instantiation of functions
