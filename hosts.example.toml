@@ -1,0 +1,24 @@
+#Example TOML file
+#
+#os options:
+# debian,centos,fedora,arch,arch1(with yay)
+#
+#
+#[hostname]
+#	[hostname.config]	
+#		ip_address=	"ip"
+#		port=		"port"
+#		os=		"os"
+#		user=		"user"
+#		rsync=		"arp"
+#	[[hostname.paths]]
+#		rsync_custom=	"arvp"
+#		path=		"/path"
+#		dest=		"/dest"
+#	[[hostname.paths]]
+#		rsync_custom=	"avrXP"
+#		path=		"/path"
+#		dest=		"/dest"	
+#	[[hostname.custom]]
+#		cmd=		"cat /etc/resolv.conf"
+#		cmd_output=	"/dest/resolv.conf"
