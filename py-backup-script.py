@@ -152,6 +152,7 @@ def config_parser():
                     execution_custom(hosts,host_ip,host_port,host_user,host_os,custom_cmd,custom_cmd_out)
             except:
                 pass
+            print(hosts[0] + ":","backup complete")
     else:
         print("\nERROR: config file does not exist")
         quit()
