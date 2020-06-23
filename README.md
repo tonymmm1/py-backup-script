@@ -11,23 +11,23 @@ sudo pip3 install toml
 
 ### Instructions:
 
-1. Make sure Python3 is installed
+#### Step 1. Make sure Python3 is installed
 
-2. Look at hosts.example.toml and copy it to hosts.toml
+#### Step 2. Look at hosts.example.toml and copy it to hosts.toml
 
 ```
 cp hosts.example.toml hosts.toml
 ```
 
-3. Configure hosts.toml
+#### Step 3. Configure hosts.toml
 
 ```
 vim hosts.toml
 ```
 
-4. Make sure host that is running script has publickey permissions to remote host with defined user
+#### Step 4. Make sure host that is running script has publickey permissions to remote host with defined user
 
-5. Make sure remote user has sudo permissions for running any specified operation
+#### Step 5. Make sure remote user has sudo permissions for running any specified operation
 
 ### Usage:
 
